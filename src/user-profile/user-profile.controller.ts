@@ -6,7 +6,9 @@ import {
   Param,
   Patch,
   Post,
+  Request as Req,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { CreateUserProfileDto } from './dto/create-user-profile.dto';
 import { UpdateUserProfileDto } from './dto/update-user-profile.dto';
 import { UserProfile } from './interfaces/user-profile.interface';
@@ -24,8 +26,8 @@ export class UserProfileController {
   }
 
   @Get()
-  async getUserProfiles(): Promise<UserProfile[]> {
-    return this.userProfileService.findAll();
+  async getUserProfiles(@Req() req: Request) {
+    return this.userProfileService.findAll(req);
   }
 
   @Get(':id')
