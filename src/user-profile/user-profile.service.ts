@@ -36,11 +36,11 @@ export class UserProfileService {
     let query = {};
     let sortOption = {};
 
-    if (req.query.s) {
+    if (req.query.search) {
       query = {
         $or: [
-          { displayName: new RegExp(req.query.s.toString(), 'i') },
-          { photoUrl: new RegExp(req.query.s.toString(), 'i') },
+          { displayName: new RegExp(req.query.search.toString(), 'i') },
+          { photoUrl: new RegExp(req.query.search.toString(), 'i') },
         ],
       };
     }
