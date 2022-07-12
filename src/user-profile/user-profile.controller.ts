@@ -35,6 +35,15 @@ export class UserProfileController {
     return this.userProfileService.findById(id);
   }
 
+  @Get('single/:uid')
+  async getOneUserProfileByUid(
+    @Param('uid') uid: string,
+  ): Promise<UserProfile | { data: string }> {
+    const userProfile = await this.userProfileService.findByUid(uid);
+    if (!userProfile) return { data: 'empty' };
+    return userProfile;
+  }
+
   @Patch(':id')
   async updateUserProfile(
     @Param('id') id: string,

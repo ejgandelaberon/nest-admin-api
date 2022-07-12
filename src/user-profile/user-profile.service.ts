@@ -39,6 +39,7 @@ export class UserProfileService {
     if (req.query.search) {
       query = {
         $or: [
+          { uid: new RegExp(req.query.search.toString()) },
           { displayName: new RegExp(req.query.search.toString(), 'i') },
           { photoUrl: new RegExp(req.query.search.toString(), 'i') },
         ],
@@ -71,6 +72,10 @@ export class UserProfileService {
 
   async findById(id: string): Promise<UserProfile> {
     return this.userProfileModel.findById(id).exec();
+  }
+
+  async findByUid(uid: string): Promise<UserProfile> {
+    return this.userProfileModel.findOne({ uid: uid }).exec();
   }
 
   async update(id: string, dto: UpdateUserProfileDto): Promise<UserProfile> {
