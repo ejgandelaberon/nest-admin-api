@@ -10,5 +10,5 @@ export class CreateUserProfileDto {
   displayName: string;
 
   @IsString()
-  photoUrl?: string;
+  photoUrl?: string = '';
 }
